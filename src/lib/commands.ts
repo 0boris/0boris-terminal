@@ -9,13 +9,22 @@ interface Command {
   execute: () => CommandOutput | CommandOutput[];
 }
 
+export let userIp: string = '';
+
+export const fetchUserIp = async () => {
+  const response = await fetch('https://myip.wtf/text');
+  userIp = (await response.text()).trim();
+};
+
+await fetchUserIp();
+
 export const commands: Command[] = [
   {
     name: 'help',
     description: 'Display available commands',
     execute: () => {
       const commandList = commands
-        .map(cmd => `<span class="primary-output">${cmd.name}</span><span class="secondary-output">${cmd.description}</span>`)
+        .map(cmd => `<span class="primary-output">${cmd.name}</span> <span class="secondary-output">${cmd.description}</span>`)
         .join('\n');
       return {
         command: 'help',
@@ -36,7 +45,7 @@ export const commands: Command[] = [
     execute: () => {
       return {
         command: 'whoami',
-        response: '<br><span class="main-output">guest</span>',
+        response: `<br><span class="main-output">guest@${userIp}</span>`,
       };
     },
   },

@@ -1,7 +1,6 @@
 <script lang="ts">
   import { executeCommand, type CommandOutput } from "$lib/commands";
   import { cascade } from "svelte-typewriter";
-  import { linear } from "svelte/easing";
 
   let command = "";
   let output: CommandOutput[] = [
@@ -14,6 +13,7 @@
   let history: string[] = [];
   let historyIndex = -1;
   let isSudoMode = false;
+
 
   const handleInput = (e: KeyboardEvent) => {
     if (e.key === "Enter") {
@@ -63,9 +63,9 @@
     <div>
       {#if line.command}
         {#if line.command === "sudo"}
-        <span class="mr-2 main-text">sudo@0boris.tech:~$</span>{line.command}
+        <span class="mr-2 main-text">sudo@0boris.xyz:~$</span>{line.command}
         {:else}
-        <span class="mr-2 main-text">guest@0boris.tech:~$</span>{line.command}
+        <span class="mr-2 main-text">guest@0boris.xyz:~$</span>{line.command}
         {/if}
       {/if}
       <div use:cascade={{ interval: 30 }}>
@@ -77,7 +77,7 @@
   {/each}
   <div class="flex items-center">
       {#if command === "sudo"}
-      <span class="mr-2 mt-[20px] main-text">suuuudo@0boris.tech:~$</span>
+      <span class="mr-2 mt-[20px] main-text">sudo@0boris.xyz:~$</span>
       <span class="mt-4 main-input" id="command">{command}</span>
       <b class="cursor mt-[20px]">█</b>
       <input
@@ -87,7 +87,7 @@
         on:keydown={handleInput}
       />
       {:else}
-      <span class="mr-2 mt-[20px] main-text">guest@0boris.tech:~$</span>
+      <span class="mr-2 mt-[20px] main-text">guest@0boris.xyz:~$</span>
       <span class="mt-4 main-input" id="command">{command}</span>
       <b class="cursor mt-[20px]">█</b>
       <input
