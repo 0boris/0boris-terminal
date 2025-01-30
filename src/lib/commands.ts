@@ -15,8 +15,8 @@ export const fetchUserIp = async () => {
   const response = await fetch('https://myip.wtf/text');
   userIp = (await response.text()).trim();
 };
-
-await fetchUserIp();
+/* IP detection disabled due to incompatibility with Vercel */
+// await fetchUserIp();
 
 export const commands: Command[] = [
   {
